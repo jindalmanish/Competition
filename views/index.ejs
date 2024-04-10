@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Pass a JavaScript variable to a partial in EJS -->
+  <%- include('partials/head.ejs', { title: "Home page" }) %>
+
+  <body>
+    <%- include('partials/navbar') %>
+                <div class="root">
+              <header>
+                <div class="container">
+                  <a href="/"><h1>Dashboard</h1></a>
+                  <nav>
+                  <div><span>Group7@metropolia.fi</span><button>Log out</button></div>
+                  </nav>
+                </div>
+              </header>
+              <div class="pages">
+                <div class="home">
+                  <div class="bookArray">
+                    <% books.forEach(book => { %>
+                      <div class="book-details">
+                        <h4>Title: <%= book.title %></h4>
+                        <p>Author: <%= book.author %></p>
+                        <p>Genre: <%= book.genre %></p>
+                        <a href="/single-book/<%= book._id %>"> <span class="material-symbols-outlined" action="/deletebook">Update / Delete</span></a>
+                      </div>
+                    <% }); %>
+                  </div>
+                  <form class="create" action="/addbook" method="POST">
+                    <!-- Adjust action attribute as needed -->
+                    <h3>Add a New Book</h3>
+                    <label>Title:</label><input type="text" name="title" required />
+                    <label>Author:</label><input type="text" name="author" required />
+                    <label>Genre:</label><input type="text" name="genre" required />
+                    <button type="submit">Add Book</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+           <%- include('partials/footer') %>
+  </body>
+</html>
